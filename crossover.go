@@ -7,24 +7,31 @@ import (
 )
 
 // One point crossover
-func Crossover1P(p1, p2 *DNA) {
+func Crossover1P(p1, p2 *DNA) (*DNA, *DNA) {
 	len1 := float64(p1.size)
 	len2 := float64(p2.size)
 	shorter := int(math.Min(len1, len2))
 	xoverPoint := rand.Intn(shorter)
 
 	var ch1, ch2 bytes.Buffer
-	ch1.Write(p1.gene[:xoverPoint])
-	ch1.Write(p2.gene[xoverPoint:])
-	ch2.Write(p2.gene[:xoverPoint])
-	ch2.Write(p1.gene[xoverPoint:])
+	ch1.WriteString(p1.gene[:xoverPoint])
+	ch1.WriteString(p2.gene[xoverPoint:])
+	ch2.WriteString(p2.gene[:xoverPoint])
+	ch2.WriteString(p1.gene[xoverPoint:])
 
-	p1.gene = ch1.String()
-	p2.gene = ch2.String()
+	return &DNA{
+			size:    p1.size,
+			gene:    ch1.String(),
+			fitness: 0.0,
+		}, &DNA{
+			size:    p2.size,
+			gene:    ch2.String(),
+			fitness: 0.0,
+		}
 }
 
 // Two point crossover
-func Crossover2P(p1, p2 *DNA) {
+func Crossover2P(p1, p2 *DNA) (*DNA, *DNA) {
 	len1 := float64(p1.size)
 	len2 := float64(p2.size)
 	shorter := int(math.Min(len1, len2))
@@ -38,19 +45,50 @@ func Crossover2P(p1, p2 *DNA) {
 	}
 
 	var ch1, ch2 bytes.Buffer
-	ch1.Write(p1.gene[:xoverPoint1])
-	ch1.Write(p2.gene[xoverPoint1:xoverPoint2])
-	ch1.Write(p1.gene[xoverPoint2:])
+	ch1.WriteString(p1.gene[:xoverPoint1])
+	ch1.WriteString(p2.gene[xoverPoint1:xoverPoint2])
+	ch1.WriteString(p1.gene[xoverPoint2:])
 
-	ch2.Write(p2.gene[:xoverPoint1])
-	ch2.Write(p1.gene[xoverPoint1:xoverPoint2])
-	ch2.Write(p2.gene[xoverPoint2:])
+	ch2.WriteString(p2.gene[:xoverPoint1])
+	ch2.WriteString(p1.gene[xoverPoint1:xoverPoint2])
+	ch2.WriteString(p2.gene[xoverPoint2:])
 
-	p1.gene = ch1.String()
-	p2.gene = ch2.String()
+	return &DNA{
+			size:    p1.size,
+			gene:    ch1.String(),
+			fitness: 0.0,
+		}, &DNA{
+			size:    p2.size,
+			gene:    ch2.String(),
+			fitness: 0.0,
+		}
+
 }
 
-// Uniform crossover
-func UCrossover(p1, p2 *DNA) {
+// Uniform crossover given mutation rate
+func UCrossover(p1, p2 *DNA, r float64) (*DNA, *DNA) {
+	len1 := float64(p1.size)
+	len2 := float64(p2.size)
+	shorter := int(math.Min(len1, len2))
+
+	var ch1, ch2 bytes.Buffer
+	for i := 0; i < shorter; i++ {
+		if rand.Float64() < r {
+			ch1.WriteByte(p2.gene[i])
+			ch2.WriteByte(p1.gene[i])
+		} else {
+			ch1.WriteByte(p1.gene[i])
+			ch2.WriteByte(p2.gene[i])
+		}
+	}
+	return &DNA{
+			size:    p1.size,
+			gene:    ch1.String(),
+			fitness: 0.0,
+		}, &DNA{
+			size:    p2.size,
+			gene:    ch2.String(),
+			fitness: 0.0,
+		}
 
 }
