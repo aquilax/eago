@@ -1,4 +1,4 @@
-package algorithm
+package eago
 
 type EA interface {
 	InitPopulation()
