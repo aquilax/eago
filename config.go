@@ -1,18 +1,18 @@
 package eago
 
 type Config struct {
-	DNALen  int64              // DNA length
-	PopSize int64              // population size
-	NumGen  int64              // number of generations
-	Eval    func(*DNA) float64 // evaluation function
+	DNALen       int     // DNA length
+	PopSize      int     // population size
+	NumGen       int     // number of generations
+	MutationRate float64 // mutation rate
+
+	Compare   func(*DNA, *DNA) int          // compare two DNAs
+	Evaluate  func(*DNA) float64            // evaluation function
+	Select    func([]*DNA) *DNA             // select with replacement
+	Crossover func(*DNA, *DNA) (*DNA, *DNA) // crossover
 }
 
 // new configuration default to null
 func NewConfig() *Config {
-	return &Config{
-		DNALen:  0,   // default: 0
-		PopSize: 0,   // default: 0
-		NumGen:  0,   // default: 0
-		Eval:    nil, // default: nil
-	}
+	return &Config{}
 }

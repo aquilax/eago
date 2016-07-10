@@ -5,6 +5,7 @@ import (
 	"math/rand"
 )
 
+// binary-coded DNA
 type DNA struct {
 	size    int     // size of the chromosome
 	gene    string  // binary-coded gene
@@ -38,6 +39,11 @@ func (d *DNA) Gene() string {
 	return d.gene
 }
 
+// get fitness
+func (d *DNA) Fitness() float64 {
+	return d.fitness
+}
+
 // reset fitness score with default score
 func (d *DNA) Reset() {
 	d.fitness = 0.0
@@ -48,8 +54,15 @@ func (d *DNA) Evaluate(eval func(d *DNA) float64) {
 	d.fitness = eval(d)
 }
 
+// copy other DNA
+func (d *DNA) Copy(d1 *DNA) {
+	d.size = d1.size
+	d.gene = d1.gene
+	d.fitness = d1.fitness
+}
+
 // bit flip mutation given mutation rate
-func (d *DNA) BFMutate(r float64) {
+func (d *DNA) Mutate(r float64) {
 	var newGene bytes.Buffer
 	for i := 0; i < d.size; i++ {
 		bit := string(d.gene[i])
@@ -66,5 +79,3 @@ func (d *DNA) BFMutate(r float64) {
 	// update gene
 	d.gene = newGene.String()
 }
-
-//

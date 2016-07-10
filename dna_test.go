@@ -10,7 +10,7 @@ func TestDNA(t *testing.T) {
 	// rand seed set to 0
 	rand.Seed(0)
 
-	// create a new DNA
+	// create a new binary-coded DNA
 	d := NewDNA(10)
 	fmt.Printf("DNA size: %d\n", d.Size())
 	fmt.Printf("DNA gene: %s\n", d.Gene())
@@ -25,7 +25,7 @@ func TestDNA(t *testing.T) {
 
 	// bit flip mutation
 	mrate := 0.3
-	d.BFMutate(mrate)
+	d.Mutate(mrate)
 	fmt.Printf("Mutation rate: %f\n", mrate)
 	fmt.Printf("Mutated DNA gene: %s\n", d.gene)
 }
