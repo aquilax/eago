@@ -43,14 +43,14 @@ func Eval(d *eago.DNA) float64 {
 func GeneticAlgorithm() {
 	// Configure first
 	c := &eago.Config{
-		DNALen:       20,                 // size of each DNA
-		PopSize:      50,                 // population size (number of DNAs)
-		NumGen:       100,                // number of generations
-		MutationRate: 0.3,                // mutation rate
-		Compare:      Compare,            // comparison method
-		Evaluate:     Eval,               // evaluation method
-		Select:       TSelect,            // selection method
-		Crossover:    UCrossover(0.3),    // crossover method
+		DNALen:       20,                   // size of each DNA
+		PopSize:      50,                   // population size (number of DNAs)
+		NumGen:       100,                  // number of generations
+		MutationRate: 0.3,                  // mutation rate
+		Compare:      Compare,              // comparison method
+		Evaluate:     Eval,                 // evaluation method
+		Select:       eago.TSelect,         // selection method
+		Crossover:    eago.UCrossover(0.3), // crossover method
 	}
 
     // Create GA,
