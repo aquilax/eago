@@ -1,18 +1,21 @@
 #EAGO
 ![alt text](https://github.com/jinseokYeom/eago/blob/master/eago.png "EAGO")
 ## Overview
-EAGO is a simple framework for evolutionary computation in Go.
+EAGO is a simple framework for evolutionary computation (EC) in Go. You can use
+this framework to run any kind of EC experiment, simply by two steps: configure
+and run. 
 ## Example
 
 ```go
-package eago
+package main
 
 import (
 	"fmt"
+    "github.com/jinseokYeom/eago"
 )
 
 // define how you compare fitnesses
-func Compare(d1, d2 *DNA) int {
+func Compare(d1, d2 *eago.DNA) int {
 	// higher the fitness, the better
 	switch {
 	case d1.Fitness() > d2.Fitness():
@@ -25,7 +28,7 @@ func Compare(d1, d2 *DNA) int {
 }
 
 // define an evaluation function
-func Eval(d *DNA) float64 {
+func Eval(d *eago.DNA) float64 {
 	gene := d.Gene()
 	score := 0.0
 	for i := 0; i < 20; i++ {
@@ -38,8 +41,8 @@ func Eval(d *DNA) float64 {
 }
 
 func GeneticAlgorithm() {
-	// Configure first.
-	c := &Config{
+	// Configure first
+	c := &eago.Config{
 		DNALen:       20,                 // size of each DNA
 		PopSize:      50,                 // population size (number of DNAs)
 		NumGen:       100,                // number of generations
@@ -51,7 +54,7 @@ func GeneticAlgorithm() {
 	}
 
     // Create GA,
-	ga := NewGA(c)
+	ga := eago.NewGA(c)
 
     // ...and run!
     ga.Run()
