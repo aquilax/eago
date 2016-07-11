@@ -1,6 +1,9 @@
 package eago
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func Compare(d1, d2 *DNA) int {
 	// higher the fitness, the better
@@ -36,8 +39,13 @@ func TestGA(t *testing.T) {
 		Compare:      Compare,
 		Evaluate:     Eval,
 		Select:       TSelect,
+		Crossover:    Crossover1P,
 	}
 
 	ga := NewGA(c)
 	ga.Run()
+
+	best := ga.Best()
+	fmt.Printf("BEST: %s\n", best.Gene())
+	fmt.Printf("SCORE: %d\n", int(best.Fitness()))
 }

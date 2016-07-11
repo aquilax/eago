@@ -9,6 +9,8 @@ type EA interface {
 	update()
 	// execute algorithm
 	Run()
+	// get best DNA
+	Best() *DNA
 }
 
 // Genetic Algorithm
@@ -37,6 +39,7 @@ func (g *GA) initPopulation() {
 // assess each DNA's fitness
 func (g *GA) assessFitness() {
 	for i, _ := range g.population {
+		g.population[i].Reset()
 		g.population[i].Evaluate(g.conf.Evaluate)
 	}
 	g.population = g.quickSort(g.population)
@@ -90,4 +93,9 @@ func (g *GA) Run() {
 		g.assessFitness()
 		g.update()
 	}
+}
+
+// get best DNA
+func (g *GA) Best() *DNA {
+	return g.best
 }
