@@ -1,10 +1,14 @@
 package eago
 
 type EA interface {
-	InitPopulation()
-	AssessFitness()
+	// initialize population
+	initPopulation()
+	// assess fitness
+	assessFitness()
+	// update best/population
+	update()
+	// execute algorithm
 	Run()
-	Update()
 }
 
 // Genetic Algorithm
@@ -68,13 +72,15 @@ func (g *GA) update() {
 	size := g.conf.PopSize
 	g.best.Copy(g.population[size-1])
 	// update the population
-	p1 := g.conf.Select(g.population)
-	p2 := g.conf.Select(g.population)
-	c1, c2 := g.conf.Crossover(p1, p2)
-	c1.Mutate(g.conf.MutationRate)
-	c2.Mutate(g.conf.MutationRate)
-	p1.Copy(c1)
-	p2.Copy(c2)
+	for i := 0; i < g.conf.PopSize; i++ {
+		p1 := g.conf.Select(g.population)
+		p2 := g.conf.Select(g.population)
+		c1, c2 := g.conf.Crossover(p1, p2)
+		c1.Mutate(g.conf.MutationRate)
+		c2.Mutate(g.conf.MutationRate)
+		p1.Copy(c1)
+		p2.Copy(c2)
+	}
 }
 
 // run GA
