@@ -39,7 +39,7 @@ func TestGA(t *testing.T) {
 		Compare:      Compare,
 		Evaluate:     Eval,
 		Select:       TSelect,
-		Crossover:    Crossover1P,
+		Crossover:    UCrossover(0.3),
 	}
 
 	ga := NewGA(c)

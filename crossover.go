@@ -66,29 +66,30 @@ func Crossover2P(p1, p2 *DNA) (*DNA, *DNA) {
 }
 
 // Uniform crossover given mutation rate
-func UCrossover(p1, p2 *DNA, r float64) (*DNA, *DNA) {
-	len1 := float64(p1.size)
-	len2 := float64(p2.size)
-	shorter := int(math.Min(len1, len2))
+func UCrossover(r float64) func(*DNA, *DNA) (*DNA, *DNA) {
+	return func(p1, p2 *DNA) (*DNA, *DNA) {
+		len1 := float64(p1.size)
+		len2 := float64(p2.size)
+		shorter := int(math.Min(len1, len2))
 
-	var ch1, ch2 bytes.Buffer
-	for i := 0; i < shorter; i++ {
-		if rand.Float64() < r {
-			ch1.WriteByte(p2.gene[i])
-			ch2.WriteByte(p1.gene[i])
-		} else {
-			ch1.WriteByte(p1.gene[i])
-			ch2.WriteByte(p2.gene[i])
+		var ch1, ch2 bytes.Buffer
+		for i := 0; i < shorter; i++ {
+			if rand.Float64() < r {
+				ch1.WriteByte(p2.gene[i])
+				ch2.WriteByte(p1.gene[i])
+			} else {
+				ch1.WriteByte(p1.gene[i])
+				ch2.WriteByte(p2.gene[i])
+			}
 		}
+		return &DNA{
+				size:    p1.size,
+				gene:    ch1.String(),
+				fitness: 0.0,
+			}, &DNA{
+				size:    p2.size,
+				gene:    ch2.String(),
+				fitness: 0.0,
+			}
 	}
-	return &DNA{
-			size:    p1.size,
-			gene:    ch1.String(),
-			fitness: 0.0,
-		}, &DNA{
-			size:    p2.size,
-			gene:    ch2.String(),
-			fitness: 0.0,
-		}
-
 }

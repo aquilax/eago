@@ -32,7 +32,7 @@ func TestCrossover(t *testing.T) {
 
 	// Uniform crossover
 	fmt.Printf("Uniform crossover\n")
-	ch1, ch2 = UCrossover(d1, d2, 0.2)
+	ch1, ch2 = UCrossover(0.2)(d1, d2)
 	fmt.Printf("DNA 1: %s\n", ch1.Gene())
 	fmt.Printf("DNA 2: %s\n", ch2.Gene())
 }
