@@ -54,7 +54,7 @@ func (d *DNA) Evaluate(eval func(d *DNA) float64) {
 	d.fitness = eval(d)
 }
 
-// copy other DNA
+// copy other DNA's information
 func (d *DNA) Copy(d1 *DNA) {
 	d.size = d1.size
 	d.gene = d1.gene

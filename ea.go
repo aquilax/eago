@@ -13,16 +13,16 @@ type EA interface {
 
 // Genetic Algorithm
 type GA struct {
-	conf       *Config            // configuration
-	best       *DNA               // best performing gene
-	population []*DNA             // population
-	evalfunc   func(*DNA) float64 // evaluation function
+	conf       *Config // configuration
+	best       *DNA    // best performing gene
+	population []*DNA  // population
 }
 
 func NewGA(conf *Config) *GA {
 	return &GA{
-		conf:       conf,
-		population: make([]*DNA, conf.PopSize),
+		conf:       conf,                       // configuration
+		best:       NewDNA(conf.DNALen),        // random DNA as best
+		population: make([]*DNA, conf.PopSize), // population
 	}
 }
 
@@ -61,20 +61,20 @@ func (g *GA) quickSort(p []*DNA) []*DNA {
 			equal = append(equal, dna)
 		}
 	}
-	low = append(g.quickSort(low), equal...)
+	low = append(equal, g.quickSort(low)...)
 	high = g.quickSort(high)
-	return append(low, high...)
+	return append(high, low...)
 }
 
 // update states
 func (g *GA) update() {
 	// update the best
-	size := g.conf.PopSize
-	g.best.Copy(g.population[size-1])
+	best := g.population[0]
+	g.best.Copy(best)
 	// update the population
 	for i := 0; i < g.conf.PopSize; i++ {
-		p1 := g.conf.Select(g.population)
-		p2 := g.conf.Select(g.population)
+		p1 := g.conf.Select(g.conf.Compare, g.population)
+		p2 := g.conf.Select(g.conf.Compare, g.population)
 		c1, c2 := g.conf.Crossover(p1, p2)
 		c1.Mutate(g.conf.MutationRate)
 		c2.Mutate(g.conf.MutationRate)
