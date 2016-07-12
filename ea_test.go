@@ -19,8 +19,9 @@ func Compare(d1, d2 *DNA) int {
 
 func Eval(d *DNA) float64 {
 	gene := d.Gene()
+	size := d.Size()
 	score := 0.0
-	for i := 0; i < 20; i++ {
+	for i := 0; i < size; i++ {
 		bit := string(gene[i])
 		if bit == "1" {
 			score++
@@ -32,18 +33,18 @@ func Eval(d *DNA) float64 {
 func TestGA(t *testing.T) {
 	// new config
 	c := &Config{
-		DNALen:       20,
-		PopSize:      50,
-		NumGen:       100,
-		MutationRate: 0.3,
+		DNALen:       30,
+		PopSize:      100,
+		NumGen:       500,
+		MutationRate: 0.5,
 		Compare:      Compare,
 		Evaluate:     Eval,
 		Select:       TSelect,
-		Crossover:    UCrossover(0.3),
+		Crossover:    Crossover1P,
 	}
 
 	ga := NewGA(c)
-	ga.Run()
+	ga.Go()
 
 	best := ga.Best()
 	fmt.Printf("BEST: %s\n", best.Gene())

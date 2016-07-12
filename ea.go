@@ -8,7 +8,7 @@ type EA interface {
 	// update best/population
 	update()
 	// execute algorithm
-	Run()
+	Go()
 	// get best DNA
 	Best() *DNA
 }
@@ -87,7 +87,7 @@ func (g *GA) update() {
 }
 
 // run GA
-func (g *GA) Run() {
+func (g *GA) Go() {
 	g.initPopulation()
 	for i := 0; i < g.conf.NumGen; i++ {
 		g.assessFitness()
