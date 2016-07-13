@@ -4,6 +4,12 @@
 EAGO is a simple framework for evolutionary computation (EC) in Go. You can use
 this framework to run any kind of EC experiment, simply by two steps: configure
 and run. 
+
+## Algorithms
+* (mu, lambda) Evolution Strategy
+* (mu + lambda) Evolution Strategy
+* Genetic Algorithm
+
 ## Example
 
 ```go
