@@ -5,6 +5,16 @@ import (
 	"math/rand"
 )
 
+// genotype interface
+type Genotype interface {
+	// copy information
+	Copy()
+	// mutation
+	Mutate()
+	// evaluate with evaluation function
+	Evaluate(func(*Genotype) float64)
+}
+
 // binary-coded DNA
 type DNA struct {
 	size    int     // size of the chromosome
