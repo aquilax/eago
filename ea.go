@@ -9,8 +9,38 @@ type EA interface {
 	update()
 	// execute algorithm
 	Go()
-	// get best DNA
-	Best() *DNA
+}
+
+// (mu, lambda) Evolutionary Strategy
+type MLESComma struct {
+	conf       *Config // configuration
+	best       *DNA    // best performing gene
+	population []*DNA  // population
+}
+
+func NewMLESComma(conf *Config, mu, lambda int) *MLESComma {
+	return &MLESComma{
+		mu:         mu,                   // selected parents
+		lambda:     lambda,               // generated children
+		conf:       conf,                 // configuration
+		best:       NewDNA(conf.DNALen),  // random DNA as best
+		population: make([]*DNA, lambda), // population
+	}
+}
+
+// initialize population
+func (m *MLESComma) initPopulation() {
+	len := m.conf.DNALen
+	for i, _ := range m.population {
+		m.population = NewDNA(len)
+	}
+}
+
+// (mu + lambda) Evolutionary Strategy
+type MLESPlus struct {
+	conf       *Config // configuration
+	best       *DNA    // best performing gene
+	population []*DNA  // population
 }
 
 // Genetic Algorithm
