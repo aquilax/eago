@@ -6,6 +6,8 @@ this framework to run any kind of EC experiment, simply by two steps: configure
 and run. 
 
 ## Algorithms
+Following are algorithms that are available in this framework. More will be added
+with future updates.
 * (mu, lambda) Evolution Strategy
 * (mu + lambda) Evolution Strategy
 * Genetic Algorithm
