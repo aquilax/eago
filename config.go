@@ -36,3 +36,43 @@ type Config struct {
 func NewConfig() *Config {
 	return &Config{}
 }
+
+// set DNA length
+func (c *Config) DNALen(len int) {
+	c.DNALen = len
+}
+
+// set Population size
+func (c *Config) PopSize(size int) {
+	c.PopSize = size
+}
+
+// set number of generations
+func (c *Config) NumGen(n int) {
+	c.NumGen = n
+}
+
+// set mutation rate
+func (c *Config) MutationRate(r float64) {
+	c.MutationRate = r
+}
+
+// set comparison function
+func (c *Config) Compare(fn func(*DNA, *DNA) int) {
+	c.Compare = fn
+}
+
+// set evaluation function
+func (c *Config) Evaluate(fn func(*DNA) float64) {
+	c.Evaluate = fn
+}
+
+// set selection function
+func (c *Config) Select(fn func(func(*DNA, *DNA) int, []*DNA)) {
+	c.Select = fn
+}
+
+// set crossover function
+func (c *Config) Crossover(fn func(*DNA, *DNA) (*DNA, *DNA)) {
+	c.Crossover = fn
+}
