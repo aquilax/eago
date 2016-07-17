@@ -60,3 +60,8 @@ func GeneticAlgorithm() {
 	fmt.Printf("SCORE: %d\n", int(best.Fitness()))
 }
 ```
+## Note
+Simplicity is one of the top priorities of this framework; some decisions
+were made during the development for such reason.
+* Genotype is only represented with binary string (at least for now).
+* Fitness values are always float64.
