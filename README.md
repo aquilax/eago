@@ -8,9 +8,12 @@ and run.
 ## Algorithms
 Following are algorithms that are available in this framework. More will be added
 with future updates.
-* (mu, lambda) Evolution Strategy
-* (mu + lambda) Evolution Strategy
+* (mu, lambda) Evolution Strategy (in progress)
+* (mu + lambda) Evolution Strategy (in progress)
 * Genetic Algorithm
+* Genetic Algorithm with Elitism (planned)
+* Steady-State Genetic Algorithm (planned)
+* And more
 
 ## Example
 
