@@ -1,0 +1,35 @@
+package eago
+
+// score and fitness are directly related
+// if g1.fitness < g2.fitness, return -1
+// if g1.fitness = g2.fitness, return 0
+// if g1.fitness > g2.fitness, return 1
+func DirectCompare(g1, g2 Genotype) int {
+	f1 := g1.Fitness()
+	f2 := g2.Fitness()
+	switch {
+	case f1 < f2:
+		return -1
+	case f1 == f2:
+		return 0
+	default:
+		return 1
+	}
+}
+
+// score and fitness are inversely related
+// if g1.fitness > g2.fitness, return -1
+// if g1.fitness = g2.fitness, return 0
+// if g1.fitness < g2.fitness, return 1
+func InverseCompare(g1, g2 Genotype) int {
+	f1 := g1.Fitness()
+	f2 := g2.Fitness()
+	switch {
+	case f1 > f2:
+		return -1
+	case f1 == f2:
+		return 0
+	default:
+		return 1
+	}
+}
