@@ -32,16 +32,16 @@ func NewMLESComma(mu, lambda int, conf *Config) *MLESComma {
 		mu:         mu,                   // selected parents
 		lambda:     lambda,               // generated children
 		conf:       conf,                 // configuration
-		best:       NewDNA(conf.DNALen),  // random DNA as best
+		best:       NewDNA(conf.GeneLen), // random DNA as best
 		population: make([]*DNA, lambda), // population
 	}
 }
 
 // initialize population
 func (m *MLESComma) initPopulation() {
-	len := m.conf.DNALen
+	len := m.conf.GeneLen
 	for i, _ := range m.population {
-		m.population = NewDNA(len)
+		m.population[i] = NewDNA(len)
 	}
 }
 
@@ -81,7 +81,7 @@ func (m *MLESComma) quickSort(p []*DNA) []*DNA {
 // update
 func (m *MLESComma) update() {
 	// assuming population is already sorted
-	selected := m.population[:m.mu]
+	//	selected := m.population[:m.mu]
 
 }
 
@@ -107,14 +107,14 @@ type GA struct {
 func NewGA(conf *Config) *GA {
 	return &GA{
 		conf:       conf,                       // configuration
-		best:       NewDNA(conf.DNALen),        // random DNA as best
+		best:       NewDNA(conf.GeneLen),       // random DNA as best
 		population: make([]*DNA, conf.PopSize), // population
 	}
 }
 
 // initialize random population
 func (g *GA) initPopulation() {
-	len := g.conf.DNALen
+	len := g.conf.GeneLen
 	for i, _ := range g.population {
 		g.population[i] = NewDNA(len)
 	}

@@ -7,12 +7,18 @@ import (
 
 // genotype interface
 type Genotype interface {
+	// get size
+	Size() int
+	// get gene
+	Gene() string
+	// get fitness
+	Fitness() float64
 	// copy information
-	Copy()
+	Copy(Genotype)
 	// mutation
-	Mutate()
+	Mutate(float64)
 	// evaluate with evaluation function
-	Evaluate(func(*Genotype) float64)
+	Evaluate(EvaluateFunc)
 }
 
 // binary-coded DNA
@@ -60,7 +66,7 @@ func (d *DNA) Reset() {
 }
 
 // evaluate given an evaluation function
-func (d *DNA) Evaluate(eval func(d *DNA) float64) {
+func (d *DNA) Evaluate(eval EvaluateFunc) {
 	d.fitness = eval(d)
 }
 

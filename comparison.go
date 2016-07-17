@@ -4,9 +4,9 @@ package eago
 // if g1.fitness < g2.fitness, return -1
 // if g1.fitness = g2.fitness, return 0
 // if g1.fitness > g2.fitness, return 1
-func DirectCompare(g1, g2 Genotype) int {
-	f1 := g1.Fitness()
-	f2 := g2.Fitness()
+func DirectCompare(d1, d2 *DNA) int {
+	f1 := d1.Fitness()
+	f2 := d2.Fitness()
 	switch {
 	case f1 < f2:
 		return -1
@@ -21,9 +21,9 @@ func DirectCompare(g1, g2 Genotype) int {
 // if g1.fitness > g2.fitness, return -1
 // if g1.fitness = g2.fitness, return 0
 // if g1.fitness < g2.fitness, return 1
-func InverseCompare(g1, g2 Genotype) int {
-	f1 := g1.Fitness()
-	f2 := g2.Fitness()
+func InverseCompare(d1, d2 *DNA) int {
+	f1 := d1.Fitness()
+	f2 := d2.Fitness()
 	switch {
 	case f1 > f2:
 		return -1

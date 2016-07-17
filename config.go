@@ -1,32 +1,33 @@
 package eago
 
 // Compare function
-// Arg1: DNA1 to be compared
-// Arg2: DNA2 to compare with
-// return DNA1 < DNA2:     -1
-//        DNA1 == DNA2:     0
-//        DNA1 > DNA2:      1
+// Arg1: gene1 to be compared
+// Arg2: gene2 to compare with
+// return gene1 < gene2:     -1
+//        gene1 == gene2:     0
+//        gene1 > gene2:      1
 type CompareFunc func(*DNA, *DNA) int
 
 // Evaluate function
-// Arg: DNA to be evaluated
+// Arg: gene to be evaluated
 // return fitness value in float64
 type EvaluateFunc func(*DNA) float64
 
 // Select function
 // Arg1: Compare function
-// Arg2: Population of DNAs
+// Arg2: Population of genes
 // return selected DNA
-type SelectFunc func(CompFunc, []*DNA) *DNA
+type SelectFunc func(CompareFunc, []*DNA) *DNA
 
 // Crossover function
-// Arg1: Parent 1 DNA
-// Arg2: Parent 2 DNA
-// return two children DNA after crossover
+// Arg1: Parent 1 gene
+// Arg2: Parent 2 gene
+// return two children genes after crossover
 type CrossoverFunc func(*DNA, *DNA) (*DNA, *DNA)
 
+// configuration
 type Config struct {
-	DNALen       int           // DNA length
+	GeneLen      int           // gene length
 	PopSize      int           // population size
 	NumGen       int           // number of generations
 	MutationRate float64       // mutation rate
@@ -42,41 +43,41 @@ func NewConfig() *Config {
 }
 
 // set DNA length
-func (c *Config) DNALen(len int) {
-	c.DNALen = len
+func (c *Config) SetGeneLen(len int) {
+	c.GeneLen = len
 }
 
 // set Population size
-func (c *Config) PopSize(size int) {
+func (c *Config) SetPopSize(size int) {
 	c.PopSize = size
 }
 
 // set number of generations
-func (c *Config) NumGen(n int) {
+func (c *Config) SetNumGen(n int) {
 	c.NumGen = n
 }
 
 // set mutation rate
-func (c *Config) MutationRate(r float64) {
+func (c *Config) SetMutationRate(r float64) {
 	c.MutationRate = r
 }
 
 // set comparison function
-func (c *Config) Compare(fn CompareFunc) {
+func (c *Config) SetCompare(fn CompareFunc) {
 	c.Compare = fn
 }
 
 // set evaluation function
-func (c *Config) Evaluate(fn EvaluateFunc) {
+func (c *Config) SetEvaluate(fn EvaluateFunc) {
 	c.Evaluate = fn
 }
 
 // set selection function
-func (c *Config) Select(fn SelectFunc) {
+func (c *Config) SetSelect(fn SelectFunc) {
 	c.Select = fn
 }
 
 // set crossover function
-func (c *Config) Crossover(fn CrossoverFunc) {
+func (c *Config) SetCrossover(fn CrossoverFunc) {
 	c.Crossover = fn
 }

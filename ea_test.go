@@ -5,18 +5,6 @@ import (
 	"testing"
 )
 
-func Compare(d1, d2 *DNA) int {
-	// higher the fitness, the better
-	switch {
-	case d1.Fitness() > d2.Fitness():
-		return 1
-	case d1.Fitness() < d2.Fitness():
-		return -1
-	default:
-		return 0
-	}
-}
-
 func Eval(d *DNA) float64 {
 	gene := d.Gene()
 	size := d.Size()
@@ -33,11 +21,11 @@ func Eval(d *DNA) float64 {
 func TestGA(t *testing.T) {
 	// new config
 	c := &Config{
-		DNALen:       30,
+		GeneLen:      30,
 		PopSize:      100,
 		NumGen:       500,
 		MutationRate: 0.5,
-		Compare:      Compare,
+		Compare:      DirectCompare,
 		Evaluate:     Eval,
 		Select:       TSelect,
 		Crossover:    Crossover1P,

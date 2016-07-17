@@ -3,7 +3,7 @@ package eago
 import "math/rand"
 
 // Tournament Selection
-func TSelect(c func(*DNA, *DNA) int, p []*DNA) *DNA {
+func TSelect(c CompareFunc, p []*DNA) *DNA {
 	popSize := len(p)
 	best := rand.Intn(popSize)
 	for i := 0; i < popSize; i++ {
@@ -17,7 +17,7 @@ func TSelect(c func(*DNA, *DNA) int, p []*DNA) *DNA {
 }
 
 // fitness-proportionate selection (not recommended)
-func FPSelect(c func(*DNA, *DNA) int, p []*DNA) *DNA {
+func FPSelect(c CompareFunc, p []*DNA) *DNA {
 	popSize := len(p)
 	best := p[rand.Intn(popSize)]
 	bestScore := best.Fitness()

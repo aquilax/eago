@@ -22,19 +22,6 @@ import (
     "github.com/jinseokYeom/eago"
 )
 
-// define how you compare fitnesses
-func Compare(d1, d2 *eago.DNA) int {
-	// higher the fitness, the better
-	switch {
-	case d1.Fitness() > d2.Fitness():
-		return 1
-	case d1.Fitness() < d2.Fitness():
-		return -1
-	default:
-		return 0
-	}
-}
-
 // define an evaluation function
 func Eval(d *eago.DNA) float64 {
 	gene := d.Gene()
@@ -51,11 +38,11 @@ func Eval(d *eago.DNA) float64 {
 func GeneticAlgorithm() {
 	// Configure first
 	c := &eago.Config{
-		DNALen:       20,                   // size of each DNA
+		GeneLen:      20,                   // size of each DNA
 		PopSize:      50,                   // population size (number of DNAs)
 		NumGen:       100,                  // number of generations
 		MutationRate: 0.3,                  // mutation rate
-		Compare:      Compare,              // comparison method
+		Compare:      eago.DirectCompare,   // comparison method
 		Evaluate:     Eval,                 // evaluation method
 		Select:       eago.TSelect,         // selection method
 		Crossover:    eago.UCrossover(0.3), // crossover method
