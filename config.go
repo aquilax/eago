@@ -1,35 +1,39 @@
 package eago
 
+// Compare function
+// Arg1: DNA1 to be compared
+// Arg2: DNA2 to compare with
+// return DNA1 < DNA2:     -1
+//        DNA1 == DNA2:     0
+//        DNA1 > DNA2:      1
+type CompareFunc func(*DNA, *DNA) int
+
+// Evaluate function
+// Arg: DNA to be evaluated
+// return fitness value in float64
+type EvaluateFunc func(*DNA) float64
+
+// Select function
+// Arg1: Compare function
+// Arg2: Population of DNAs
+// return selected DNA
+type SelectFunc func(CompFunc, []*DNA) *DNA
+
+// Crossover function
+// Arg1: Parent 1 DNA
+// Arg2: Parent 2 DNA
+// return two children DNA after crossover
+type CrossoverFunc func(*DNA, *DNA) (*DNA, *DNA)
+
 type Config struct {
-	DNALen       int     // DNA length
-	PopSize      int     // population size
-	NumGen       int     // number of generations
-	MutationRate float64 // mutation rate
-
-	// ____Compare function____
-	// Arg1: DNA1 to be compared
-	// Arg2: DNA2 to compare with
-	// return DNA1 < DNA2:     -1
-	//        DNA1 == DNA2:     0
-	//        DNA1 > DNA2:      1
-	Compare func(*DNA, *DNA) int
-
-	// ____Evaluate function____
-	// Arg: DNA to be evaluated
-	// return fitness value in float64
-	Evaluate func(*DNA) float64
-
-	// ____Select function____
-	// Arg1: Compare function
-	// Arg2: Population of DNAs
-	// return selected DNA
-	Select func(func(*DNA, *DNA) int, []*DNA) *DNA
-
-	// ____Crossover function____
-	// Arg1: Parent 1 DNA
-	// Arg2: Parent 2 DNA
-	// return two children DNA after crossover
-	Crossover func(*DNA, *DNA) (*DNA, *DNA)
+	DNALen       int           // DNA length
+	PopSize      int           // population size
+	NumGen       int           // number of generations
+	MutationRate float64       // mutation rate
+	Compare      CompareFunc   // compare function
+	Evaluate     EvaluateFunc  // evaluate function
+	Select       SelectFunc    // select function
+	Crossover    CrossoverFunc // crossover function
 }
 
 // new configuration default to null
@@ -58,21 +62,21 @@ func (c *Config) MutationRate(r float64) {
 }
 
 // set comparison function
-func (c *Config) Compare(fn func(*DNA, *DNA) int) {
+func (c *Config) Compare(fn CompareFunc) {
 	c.Compare = fn
 }
 
 // set evaluation function
-func (c *Config) Evaluate(fn func(*DNA) float64) {
+func (c *Config) Evaluate(fn EvaluateFunc) {
 	c.Evaluate = fn
 }
 
 // set selection function
-func (c *Config) Select(fn func(func(*DNA, *DNA) int, []*DNA)) {
+func (c *Config) Select(fn SelectFunc) {
 	c.Select = fn
 }
 
 // set crossover function
-func (c *Config) Crossover(fn func(*DNA, *DNA) (*DNA, *DNA)) {
+func (c *Config) Crossover(fn CrossoverFunc) {
 	c.Crossover = fn
 }
