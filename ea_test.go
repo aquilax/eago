@@ -44,9 +44,13 @@ func TestGA(t *testing.T) {
 	}
 
 	ga := NewGA(c)
-	ga.Go()
+	ga.Run()
 
 	best := ga.Best()
 	fmt.Printf("BEST: %s\n", best.Gene())
 	fmt.Printf("SCORE: %d\n", int(best.Fitness()))
+}
+
+func TestES(t *testing.T) {
+
 }
