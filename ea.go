@@ -10,11 +10,13 @@ type EA interface {
 	// update best/population
 	update()
 	// execute algorithm
-	Go()
+	Run()
 }
 
 // (mu, lambda) Evolutionary Strategy
 type MLESComma struct {
+	mu         int     // selected parents
+	lambda     int     // generated children
 	conf       *Config // configuration
 	best       *DNA    // best performing gene
 	population []*DNA  // population
@@ -78,7 +80,14 @@ func (m *MLESComma) quickSort(p []*DNA) []*DNA {
 
 // update
 func (m *MLESComma) update() {
+	// assuming population is already sorted
+	selected := m.population[:m.mu]
 
+}
+
+// run (mu, lambda) ES
+func (m *MLESComma) Run() {
+	m.initPopulation()
 }
 
 // (mu + lambda) Evolutionary Strategy
@@ -162,7 +171,7 @@ func (g *GA) update() {
 }
 
 // run GA
-func (g *GA) Go() {
+func (g *GA) Run() {
 	g.initPopulation()
 	for i := 0; i < g.conf.NumGen; i++ {
 		g.assessFitness()
