@@ -64,8 +64,8 @@ func GeneticAlgorithm() {
     // Create GA,
 	ga := eago.NewGA(c)
 
-    // ...and go!
-    ga.Go()
+    // ...and run!
+    ga.Run()
 
     // Check the best DNA and its fitness.
 	best := ga.Best()
