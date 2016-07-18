@@ -1,30 +1,5 @@
 package eago
 
-// Compare function
-// Arg1: gene1 to be compared
-// Arg2: gene2 to compare with
-// return gene1 < gene2:     -1
-//        gene1 == gene2:     0
-//        gene1 > gene2:      1
-type CompareFunc func(*DNA, *DNA) int
-
-// Evaluate function
-// Arg: gene to be evaluated
-// return fitness value in float64
-type EvaluateFunc func(*DNA) float64
-
-// Select function
-// Arg1: Compare function
-// Arg2: Population of genes
-// return selected DNA
-type SelectFunc func(CompareFunc, []*DNA) *DNA
-
-// Crossover function
-// Arg1: Parent 1 gene
-// Arg2: Parent 2 gene
-// return two children genes after crossover
-type CrossoverFunc func(*DNA, *DNA) (*DNA, *DNA)
-
 // configuration
 type Config struct {
 	GeneLen      int           // gene length
