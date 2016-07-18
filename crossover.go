@@ -6,7 +6,14 @@ import (
 	"math/rand"
 )
 
-// One point crossover
+// Crossover function is a type of function that takes two
+// parent DNAs and perform crossover and return two children
+// DNAs
+type CrossoverFunc func(*DNA, *DNA) (*DNA, *DNA)
+
+// One point crossover selects a random position in the two
+// parent DNAs and swap parts after that selected position;
+// then return two new DNAs created with swapped genes
 func Crossover1P(p1, p2 *DNA) (*DNA, *DNA) {
 	len1 := float64(p1.size)
 	len2 := float64(p2.size)
@@ -30,7 +37,10 @@ func Crossover1P(p1, p2 *DNA) (*DNA, *DNA) {
 		}
 }
 
-// Two point crossover
+// Two point crossover selects two random positions in the
+// two parent DNAs and swap parts in between the selected
+// positions; then return two new DNAs created with swapped
+// genes.
 func Crossover2P(p1, p2 *DNA) (*DNA, *DNA) {
 	len1 := float64(p1.size)
 	len2 := float64(p2.size)
@@ -65,8 +75,12 @@ func Crossover2P(p1, p2 *DNA) (*DNA, *DNA) {
 
 }
 
-// Uniform crossover given mutation rate
-func UCrossover(r float64) func(*DNA, *DNA) (*DNA, *DNA) {
+// Uniform crossover returns a crossover function given
+// a swapping rate; as the function  iterates through the
+// two parent  DNAs, if a randomly generated number is smaller
+// than the swapping rate, it swaps the bits in that position;
+// then returns two new DNAs created with swapped genes.
+func UCrossover(r float64) CrossoverFunc {
 	return func(p1, p2 *DNA) (*DNA, *DNA) {
 		len1 := float64(p1.size)
 		len2 := float64(p2.size)

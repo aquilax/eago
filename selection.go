@@ -2,6 +2,10 @@ package eago
 
 import "math/rand"
 
+// Selection function is a type of function that selects a
+// parent DNA from a population given a comparison function.
+type SelectFunc func(CompareFunc, []*DNA) *DNA
+
 // Tournament Selection
 func TSelect(c CompareFunc, p []*DNA) *DNA {
 	popSize := len(p)
@@ -16,7 +20,7 @@ func TSelect(c CompareFunc, p []*DNA) *DNA {
 	return p[best]
 }
 
-// fitness-proportionate selection (not recommended)
+// Fitness-Proportionate Selection (not recommended)
 func FPSelect(c CompareFunc, p []*DNA) *DNA {
 	popSize := len(p)
 	best := p[rand.Intn(popSize)]

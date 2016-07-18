@@ -1,9 +1,12 @@
 package eago
 
-// score and fitness are directly related
-// if g1.fitness < g2.fitness, return -1
-// if g1.fitness = g2.fitness, return 0
-// if g1.fitness > g2.fitness, return 1
+// Compare function is a type of function that compares
+// the first DNA to the second DNA, and returns -1 if
+// the first DNA is less fit, 0 if it is as fit as the second,
+// and 1 if it is more fit than the second.
+type CompareFunc func(*DNA, *DNA) int
+
+// Score and fitness are directly related
 func DirectCompare(d1, d2 *DNA) int {
 	f1 := d1.Fitness()
 	f2 := d2.Fitness()
@@ -17,10 +20,7 @@ func DirectCompare(d1, d2 *DNA) int {
 	}
 }
 
-// score and fitness are inversely related
-// if g1.fitness > g2.fitness, return -1
-// if g1.fitness = g2.fitness, return 0
-// if g1.fitness < g2.fitness, return 1
+// Score and fitness are inversely related
 func InverseCompare(d1, d2 *DNA) int {
 	f1 := d1.Fitness()
 	f2 := d2.Fitness()
