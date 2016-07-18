@@ -15,6 +15,9 @@ with future updates.
 * Steady-State Genetic Algorithm (planned)
 * And more
 
+## Installation
+`go get github.com/jinseokYeom/eago`
+
 ## Example
 
 ```go
