@@ -4,13 +4,15 @@ import "fmt"
 
 type EA interface {
 	// initialize population
-	initPopulation()
+	InitPopulation()
 	// assess fitness
-	assessFitness()
+	AssessFitness()
 	// update best/population
-	update()
+	Update()
 	// execute algorithm
 	Run()
+	// get best performing gene
+	Best() string
 }
 
 // (mu, lambda) Evolutionary Strategy
@@ -38,7 +40,7 @@ func NewMLESComma(mu, lambda int, conf *Config) *MLESComma {
 }
 
 // initialize population
-func (m *MLESComma) initPopulation() {
+func (m *MLESComma) InitPopulation() {
 	len := m.conf.GeneLen
 	for i, _ := range m.population {
 		m.population[i] = NewDNA(len)
@@ -46,7 +48,7 @@ func (m *MLESComma) initPopulation() {
 }
 
 // assess each DNA's fitness
-func (m *MLESComma) assessFitness() {
+func (m *MLESComma) AssessFitness() {
 	for i, _ := range m.population {
 		m.population[i].Reset()
 		m.population[i].Evaluate(m.conf.Evaluate)
@@ -79,7 +81,7 @@ func (m *MLESComma) quickSort(p []*DNA) []*DNA {
 }
 
 // update
-func (m *MLESComma) update() {
+func (m *MLESComma) Update() {
 	// assuming population is already sorted
 	selected := m.population[:m.mu]
 	ratio := m.lambda / m.mu
@@ -90,7 +92,7 @@ func (m *MLESComma) update() {
 
 // run (mu, lambda) ES
 func (m *MLESComma) Run() {
-	m.initPopulation()
+	m.InitPopulation()
 }
 
 // (mu + lambda) Evolutionary Strategy
@@ -116,7 +118,7 @@ func NewGA(conf *Config) *GA {
 }
 
 // initialize random population
-func (g *GA) initPopulation() {
+func (g *GA) InitPopulation() {
 	len := g.conf.GeneLen
 	for i, _ := range g.population {
 		g.population[i] = NewDNA(len)
@@ -124,7 +126,7 @@ func (g *GA) initPopulation() {
 }
 
 // assess each DNA's fitness
-func (g *GA) assessFitness() {
+func (g *GA) AssessFitness() {
 	for i, _ := range g.population {
 		g.population[i].Reset()
 		g.population[i].Evaluate(g.conf.Evaluate)
@@ -157,7 +159,7 @@ func (g *GA) quickSort(p []*DNA) []*DNA {
 }
 
 // update states
-func (g *GA) update() {
+func (g *GA) Update() {
 	// update the best
 	best := g.population[0]
 	g.best.Copy(best)
@@ -175,10 +177,10 @@ func (g *GA) update() {
 
 // run GA
 func (g *GA) Run() {
-	g.initPopulation()
+	g.InitPopulation()
 	for i := 0; i < g.conf.NumGen; i++ {
-		g.assessFitness()
-		g.update()
+		g.AssessFitness()
+		g.Update()
 	}
 }
 
