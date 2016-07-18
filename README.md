@@ -50,9 +50,9 @@ func GeneticAlgorithm() {
 		PopSize:      50,                   // population size (number of DNAs)
 		NumGen:       100,                  // number of generations
 		MutationRate: 0.3,                  // mutation rate
-		Compare:      eago.DirectCompare,   // comparison method
+		Compare:      eago.DirectCompare(), // comparison method
 		Evaluate:     Eval,                 // evaluation method
-		Select:       eago.TSelect,         // selection method
+		Select:       eago.TSelect(),       // selection method
 		Crossover:    eago.UCrossover(0.3), // crossover method
 	}
 
