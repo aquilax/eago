@@ -6,30 +6,36 @@ package eago
 // and 1 if it is more fit than the second.
 type CompareFunc func(*DNA, *DNA) int
 
-// Score and fitness are directly related
-func DirectCompare(d1, d2 *DNA) int {
-	f1 := d1.Fitness()
-	f2 := d2.Fitness()
-	switch {
-	case f1 < f2:
-		return -1
-	case f1 == f2:
-		return 0
-	default:
-		return 1
+// Return a comparison function in which score and fitness
+// are directly related.
+func DirectCompare() CompareFunc {
+	return func(d1, d2 *DNA) int {
+		f1 := d1.Fitness()
+		f2 := d2.Fitness()
+		switch {
+		case f1 < f2:
+			return -1
+		case f1 == f2:
+			return 0
+		default:
+			return 1
+		}
 	}
 }
 
-// Score and fitness are inversely related
-func InverseCompare(d1, d2 *DNA) int {
-	f1 := d1.Fitness()
-	f2 := d2.Fitness()
-	switch {
-	case f1 > f2:
-		return -1
-	case f1 == f2:
-		return 0
-	default:
-		return 1
+// Return a comparison function in which score and fitness
+// are inversely related.
+func InverseCompare() CompareFunc {
+	return func(d1, d2 *DNA) int {
+		f1 := d1.Fitness()
+		f2 := d2.Fitness()
+		switch {
+		case f1 > f2:
+			return -1
+		case f1 == f2:
+			return 0
+		default:
+			return 1
+		}
 	}
 }
