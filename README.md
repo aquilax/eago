@@ -1,6 +1,6 @@
-#EAGO
+#EAGO [![GoDoc](https://godoc.org/github.com/jinseokYeom/eago?status.svg)](https://godoc.org/github.com/jinseokYeom/eago)
+
 ![alt text](https://github.com/jinseokYeom/eago/blob/master/eago.png "EAGO")
-[![GoDoc](https://godoc.org/github.com/jinseokYeom/eago?status.svg)](https://godoc.org/github.com/jinseokYeom/eago)
 
 ## Overview
 EAGO is a simple framework for evolutionary computation (EC) in Go. You can use
