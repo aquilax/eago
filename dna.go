@@ -5,7 +5,8 @@ import (
 	"math/rand"
 )
 
-// binary-coded DNA
+// DNA is a binary coded genotype. It's gene is encoded
+// with a string of "0"s and "1"s.
 type DNA struct {
 	size    int     // size of the chromosome
 	gene    string  // binary-coded gene
@@ -29,39 +30,39 @@ func NewDNA(size int) *DNA {
 	}
 }
 
-// get size
+// Get DNA size in int.
 func (d *DNA) Size() int {
 	return d.size
 }
 
-// get gene
+// Get DNA gene in string.
 func (d *DNA) Gene() string {
 	return d.gene
 }
 
-// get fitness
+// Get DNA's fitness value in float64.
 func (d *DNA) Fitness() float64 {
 	return d.fitness
 }
 
-// reset fitness score with default score
+// Reset fitness score with default score.
 func (d *DNA) Reset() {
 	d.fitness = 0.0
 }
 
-// evaluate given an evaluation function
+// Evaluate given an evaluation function.
 func (d *DNA) Evaluate(eval EvaluateFunc) {
 	d.fitness = eval(d)
 }
 
-// copy other DNA's information
+// Copy other DNA's information.
 func (d *DNA) Copy(d1 *DNA) {
 	d.size = d1.size
 	d.gene = d1.gene
 	d.fitness = d1.fitness
 }
 
-// bit flip mutation given mutation rate
+// Bit flip mutation given mutation rate
 func (d *DNA) Mutate(r float64) {
 	var newGene bytes.Buffer
 	for i := 0; i < d.size; i++ {
