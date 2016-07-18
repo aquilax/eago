@@ -20,13 +20,13 @@ func TestCrossover(t *testing.T) {
 
 	// One point crossover
 	fmt.Printf("One point crossover\n")
-	ch1, ch2 := Crossover1P(d1, d2)
+	ch1, ch2 := Crossover1P()(d1, d2)
 	fmt.Printf("DNA 1: %s\n", ch1.Gene())
 	fmt.Printf("DNA 2: %s\n", ch2.Gene())
 
 	// Two point crossover
 	fmt.Printf("Two point crossover\n")
-	ch1, ch2 = Crossover2P(d1, d2)
+	ch1, ch2 = Crossover2P()(d1, d2)
 	fmt.Printf("DNA 1: %s\n", ch1.Gene())
 	fmt.Printf("DNA 2: %s\n", ch2.Gene())
 
