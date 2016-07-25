@@ -3,7 +3,7 @@ package ne
 import "math"
 
 // Activation function takes in a float64 value as an input,
-// and returns activation signal as 0 or 1.
+// and returns 0 or 1 as activation signal.
 type ActivationFunc func(float64) float64
 
 // Step function returns 1 if input is larger than 0.5,
