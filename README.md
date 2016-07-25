@@ -1,4 +1,4 @@
-#EAGO [![GoDoc](https://godoc.org/github.com/jinseokYeom/eago?status.svg)](https://godoc.org/github.com/jinseokYeom/eago)
+# EAGO [![GoDoc](https://godoc.org/github.com/jinseokYeom/eago?status.svg)](https://godoc.org/github.com/jinseokYeom/eago)
 
 ![alt text](https://github.com/jinseokYeom/eago/blob/master/eago.png "EAGO")
 
@@ -69,6 +69,10 @@ func GeneticAlgorithm() {
 	fmt.Printf("SCORE: %d\n", int(best.Fitness()))
 }
 ```
+
+## NeuroEvolution (NE)
+
+
 ## Note
 Simplicity is one of the top priorities of this framework; some decisions
 were made during the development for such reason.
