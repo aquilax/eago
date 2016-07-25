@@ -15,6 +15,7 @@ with future updates.
 * Genetic Algorithm
 * Genetic Algorithm with Elitism (planned)
 * Steady-State Genetic Algorithm (planned)
+* Variations of NeuroEvolution (planned)
 * And more
 
 ## Installation
