@@ -70,8 +70,10 @@ func GeneticAlgorithm() {
 }
 ```
 
-## NeuroEvolution (NE)
-
+## NeuroEvolution (NE) [![GoDoc](https://godoc.org/github.com/jinseokYeom/eago/ne?status.svg)](https://godoc.org/github.com/jinseokYeom/eago/ne)
+NeuroEvolution is a machine learning method that uses Evolution Algorithm
+to train a neural network. ```github.com/jinseokYeom/eago/ne``` package is a modular
+implementation that can be customized by the user's choice. 
 
 ## Note
 Simplicity is one of the top priorities of this framework; some decisions
