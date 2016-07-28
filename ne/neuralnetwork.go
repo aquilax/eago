@@ -23,7 +23,7 @@ func NewNeuralNet(conf *Config) *NeuralNet {
 			// number of weights including bias
 			numWeights := (c.NumInputs+1)*c.NumNeurons +
 				(c.NumLayers-1)*(c.NumNeurons+1)*c.NumNeurons +
-				(c.NumNeurons+1)*conf.NumOutputs
+				(c.NumNeurons+1)*c.NumOutputs
 			weights := make([]float64, numWeights)
 			return weights
 		}(conf),
