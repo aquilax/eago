@@ -83,11 +83,11 @@ func (m *MLESComma) quickSort(p []*DNA) []*DNA {
 // update
 func (m *MLESComma) Update() {
 	// assuming population is already sorted
-	selected := m.population[:m.mu]
-	ratio := m.lambda / m.mu
-	children := make([]*DNA, m.lambda)
-	for i := 0; i < ratio; i++ {
-	}
+	//selected := m.population[:m.mu]
+	//ratio := m.lambda / m.mu
+	//children := make([]*DNA, m.lambda)
+	//for i := 0; i < ratio; i++ {
+	//}
 }
 
 // run (mu, lambda) ES
@@ -161,8 +161,10 @@ func (g *GA) quickSort(p []*DNA) []*DNA {
 // update states
 func (g *GA) Update() {
 	// update the best
-	best := g.population[0]
-	g.best.Copy(best)
+	localBest := g.population[0]
+	if g.conf.Compare(localBest, g.best) == 1 {
+		g.best.Copy(localBest)
+	}
 	// update the population
 	for i := 0; i < g.conf.PopSize; i++ {
 		p1 := g.conf.Select(g.conf.Compare, g.population)
