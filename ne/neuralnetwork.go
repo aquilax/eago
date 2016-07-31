@@ -30,22 +30,21 @@ func NewNeuralNet(conf *Config) *NeuralNet {
 	}
 }
 
+// Get the neural network's weights.
+func (n *NeuralNet) Weights() []float64 {
+	return n.weights
+}
+
+// Get the number of neural network's weights.
+func (n *NeuralNet) NumWeights() int {
+	return len(n.weights)
+}
+
 // Build weights by decoding a DNA and
 // generate neural network's weights.
-func (n *NeuralNet) Build(d *eago.DNA) {
-	// if DNA size cannot be divided by number of weights
-	if d.Size()%len(n.weights) != 0 {
+func (n *NeuralNet) Build(d *eago.DNAFloat64) {
+	if d.Size() != len(n.weights) {
 		log.Fatal("Invalid DNA size")
 	}
 	n.weights = n.decode(d)
-}
-
-// Decode a DNA and generate float64 slice.
-func (n *NeuralNet) decode(d *eago.DNA) []float64 {
-	// assuming that the arg DNA is valid
-	numWeights := len(n.weights)
-	for i := 0; i < numWeights; i++ {
-
-	}
-
 }
