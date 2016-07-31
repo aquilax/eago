@@ -1,4 +1,4 @@
-package eago
+package ne
 
 import "math/rand"
 
@@ -13,8 +13,8 @@ type DNAFloat64 struct {
 // Create a new real-coded DNA given its size,
 // mean value, and standard deviation for normally
 // distributed random numbers.
-func NewDNAFloat64(size int, m, sd float64) *DNA {
-	return &DNA{
+func NewDNAFloat64(size int, m, sd float64) *DNAFloat64 {
+	return &DNAFloat64{
 		size: size,
 		gene: func() []float64 {
 			g := make([]float64, size)
@@ -33,7 +33,7 @@ func (d *DNAFloat64) Size() int {
 }
 
 // Get DNA gene in string.
-func (d *DNAFloat64) Gene() string {
+func (d *DNAFloat64) Gene() []float64 {
 	return d.gene
 }
 
@@ -47,15 +47,15 @@ func (d *DNAFloat64) Reset() {
 	d.fitness = 0.0
 }
 
-// Evaluate given an evaluation function.
+// Evaluate given a score.
 func (d *DNAFloat64) Evaluate(eval EvaluateFunc) {
-	d.fitness = eval(d)
+	d.fitness = score
 }
 
 // Copy other DNA's information.
 func (d *DNAFloat64) Copy(d1 *DNAFloat64) {
 	d.size = d1.size
-	d.gene = copy(d1.gene)
+	copy(d.gene, d1.gene)
 	d.fitness = d1.fitness
 }
 

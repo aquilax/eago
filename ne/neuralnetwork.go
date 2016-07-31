@@ -46,5 +46,13 @@ func (n *NeuralNet) Build(d *eago.DNAFloat64) {
 	if d.Size() != len(n.weights) {
 		log.Fatal("Invalid DNA size")
 	}
-	n.weights = n.decode(d)
+	copy(n.weights, d.Gene())
+}
+
+// Update the neural network and return output
+// given a set of inputs.
+func (n *NeuralNet) Update(inputs []float64) []float64 {
+	if len(inputs) != n.conf.NumInputs {
+
+	}
 }
