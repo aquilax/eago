@@ -42,5 +42,10 @@ func (n *NeuralNet) Build(d *eago.DNA) {
 
 // Decode a DNA and generate float64 slice.
 func (n *NeuralNet) decode(d *eago.DNA) []float64 {
+	// assuming that the arg DNA is valid
+	numWeights := len(n.weights)
+	for i := 0; i < numWeights; i++ {
+
+	}
 
 }

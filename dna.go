@@ -27,6 +27,7 @@ func NewDNA(size int) *DNA {
 			}
 			return buf.String()
 		}(),
+		fitness: 0.0,
 	}
 }
 
