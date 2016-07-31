@@ -15,7 +15,6 @@ with future updates.
 * Genetic Algorithm
 * Genetic Algorithm with Elitism (planned)
 * Steady-State Genetic Algorithm (planned)
-* Variations of NeuroEvolution (planned)
 * And more
 
 ## Installation
@@ -70,10 +69,17 @@ func GeneticAlgorithm() {
 }
 ```
 
-## NeuroEvolution (NE) [![GoDoc](https://godoc.org/github.com/jinseokYeom/eago/ne?status.svg)](https://godoc.org/github.com/jinseokYeom/eago/ne)
+# EAGO/NE [![GoDoc](https://godoc.org/github.com/jinseokYeom/eago/ne?status.svg)](https://godoc.org/github.com/jinseokYeom/eago/ne)
+EAGO/NE is an extention of EAGO for NeuroEvolution.
 NeuroEvolution is a machine learning method that uses Evolution Algorithm
 to train a neural network. ```github.com/jinseokYeom/eago/ne``` package is a modular
 implementation that can be customized by the user's choice. 
+
+## Algorithms (in progress)
+* NE (Basic NeuroEvolution with GA)
+* SANE (Symbiotic, Adaptive NeuroEvolution)
+* ESP (Enforced Sub-Population)
+* NEAT (NeuroEvolution of Augmenting Topologies)
 
 ## Note
 Simplicity is one of the top priorities of this framework; some decisions
