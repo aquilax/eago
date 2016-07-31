@@ -4,7 +4,7 @@ type Config struct {
 	NumInputs  int            // number of inputs
 	NumOutputs int            // number of outputs
 	NumLayers  int            // number of hidden layers
-	NumNeurons int            // number of hidden neurons
+	NumNeurons int            // number of hidden neurons in a layer
 	Activation ActivationFunc // activation function
 }
 

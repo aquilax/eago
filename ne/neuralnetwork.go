@@ -1,10 +1,6 @@
 package ne
 
-import (
-	"log"
-
-	"github.com/jinseokYeom/eago"
-)
+import "log"
 
 const (
 	BIAS = -1.0 // bias for activation
@@ -42,7 +38,7 @@ func (n *NeuralNet) NumWeights() int {
 
 // Build weights by decoding a DNA and
 // generate neural network's weights.
-func (n *NeuralNet) Build(d *eago.DNAFloat64) {
+func (n *NeuralNet) Build(d *DNA) {
 	if d.Size() != len(n.weights) {
 		log.Fatal("Invalid DNA size")
 	}
@@ -53,6 +49,51 @@ func (n *NeuralNet) Build(d *eago.DNAFloat64) {
 // given a set of inputs.
 func (n *NeuralNet) Update(inputs []float64) []float64 {
 	if len(inputs) != n.conf.NumInputs {
-
+		log.Fatal("Invalid inputs")
 	}
+	return n.update(inputs, 0)
+}
+
+// recursive neural network update helper function
+func (n *NeuralNet) update(inputs []float64, counter int) []float64 {
+	// hidden layer -> output layer
+	last := n.NumWeights() - (n.conf.NumNeurons+1)*n.conf.NumOutputs
+	if counter == last {
+		outputs := make([]float64, n.conf.NumOutputs)
+		for i, _ := range outputs {
+			for _, val := range inputs {
+				outputs[i] += val * n.weights[counter]
+				counter++
+			}
+			// add bias
+			outputs[i] += n.weights[counter] * BIAS
+			counter++
+		}
+		// apply activation function
+		for i, _ := range outputs {
+			outputs[i] = n.conf.Activation(outputs[i])
+		}
+		// for testing
+		//fmt.Printf("progress: %f\n", outputs)
+		return outputs
+	}
+	// input -> hidden layer -> hidden layer
+	outputs := make([]float64, n.conf.NumNeurons)
+	for i, _ := range outputs {
+		outputs[i] = 0.0
+		for _, val := range inputs {
+			outputs[i] += val * n.weights[counter]
+			counter++
+		}
+		// add bias
+		outputs[i] += n.weights[counter] * BIAS
+		counter++
+	}
+	// apply activation function
+	for i, _ := range outputs {
+		outputs[i] = n.conf.Activation(outputs[i])
+	}
+	// for testing
+	//fmt.Printf("progress: %f\n", outputs)
+	return n.update(outputs, counter)
 }

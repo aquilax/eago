@@ -21,6 +21,6 @@ func Step() ActivationFunc {
 // as activation signal, given a response rate.
 func Sigmoid(resp float64) ActivationFunc {
 	return func(x float64) float64 {
-		1.0 / (1.0 + math.Exp(-x/resp))
+		return 1.0 / (1.0 + math.Exp(-x/resp))
 	}
 }
