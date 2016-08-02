@@ -1,6 +1,9 @@
 package ne
 
-import "log"
+import (
+	"log"
+	"math"
+)
 
 const (
 	BIAS = -1.0 // bias for activation
@@ -39,10 +42,17 @@ func (n *NeuralNet) NumWeights() int {
 // Build weights by decoding a DNA and
 // generate neural network's weights.
 func (n *NeuralNet) Build(d *DNA) {
-	if d.Size() != len(n.weights) {
+	if d.Size()%len(n.weights) != 0 {
 		log.Fatal("Invalid DNA size")
 	}
-	copy(n.weights, d.Gene())
+	weightLen := d.Size() / len(n.weights)
+	for i, _ := range n.weights {
+		weight := d[i*weightLen : (i+1)*weightLen]
+		decoded := func() float64 {
+			max := math.Pow(2.0, len(weight)) - 1
+
+		}
+	}
 }
 
 // Update the neural network and return output
@@ -73,14 +83,12 @@ func (n *NeuralNet) update(inputs []float64, counter int) []float64 {
 		for i, _ := range outputs {
 			outputs[i] = n.conf.Activation(outputs[i])
 		}
-		// for testing
 		//fmt.Printf("progress: %f\n", outputs)
 		return outputs
 	}
 	// input -> hidden layer -> hidden layer
 	outputs := make([]float64, n.conf.NumNeurons)
 	for i, _ := range outputs {
-		outputs[i] = 0.0
 		for _, val := range inputs {
 			outputs[i] += val * n.weights[counter]
 			counter++
@@ -93,7 +101,6 @@ func (n *NeuralNet) update(inputs []float64, counter int) []float64 {
 	for i, _ := range outputs {
 		outputs[i] = n.conf.Activation(outputs[i])
 	}
-	// for testing
 	//fmt.Printf("progress: %f\n", outputs)
 	return n.update(outputs, counter)
 }

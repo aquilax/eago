@@ -14,10 +14,8 @@ func newSubpopulation(num, len int) []*DNA {
 }
 
 type ESP struct {
-	nnConf *Config      // neural network configuration
-	eaConf *eago.Config // evolutionary algorithms config
-	//coop   *CoOpGA      // Cooperative coevolution GA
-	nnet *NeuralNet // neural network
+	ga *CoOpGA    // Cooperative coevolution GA
+	nn *NeuralNet // neural network
 }
 
 func NewESP(nn *Config, ea *eago.Config) *ESP {

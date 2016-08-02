@@ -7,7 +7,7 @@ import (
 )
 
 /*
-   Test Neural Network
+   Test Deep Neural Network
 
    Number of inputs:                    3
    Number of outputs:                   2
