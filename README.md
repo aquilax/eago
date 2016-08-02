@@ -44,9 +44,9 @@ func Eval(d *eago.DNA) float64 {
 }
 
 func GeneticAlgorithm() {
-	// Configure first
-	c := &eago.Config{
-		GeneLen:      20,                   // size of each DNA
+    // Configure and create GA,
+	ga := eago.NewGA(&eago.Config{
+       	GeneLen:      20,                   // size of each DNA
 		PopSize:      50,                   // population size (number of DNAs)
 		NumGen:       100,                  // number of generations
 		MutationRate: 0.3,                  // mutation rate
@@ -54,10 +54,7 @@ func GeneticAlgorithm() {
 		Evaluate:     Eval,                 // evaluation method
 		Select:       eago.TSelect(),       // selection method
 		Crossover:    eago.UCrossover(0.3), // crossover method
-	}
-
-    // Create GA,
-	ga := eago.NewGA(c)
+    })
 
     // ...and run!
     ga.Run()
@@ -86,11 +83,3 @@ Simplicity and ease of use are the top priorities of this framework;
 some decisions were made during the development for such reason.
 * Genotype is only represented with binary string (at least for now).
 * Fitness values are always float64.
-
-## I NEED your support!
-If you're reading this, you probably have at least some knowledge in Evolutionary
-Computation and its application on optimization problems. I, myself, am still
-a student who is also studying the subject matter as I work on this project, 
-and there is no doubt that Evolutionary Computation is a very broad subject; 
-hence, there is a lot to cover in this framework. This isn't something that can be
-done by one person. More developers will be always appreciated!
