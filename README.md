@@ -82,7 +82,15 @@ implementation that can be customized by the user's choice.
 * NEAT (NeuroEvolution of Augmenting Topologies)
 
 ## Note
-Simplicity is one of the top priorities of this framework; some decisions
-were made during the development for such reason.
+Simplicity and ease of use are the top priorities of this framework; 
+some decisions were made during the development for such reason.
 * Genotype is only represented with binary string (at least for now).
 * Fitness values are always float64.
+
+## I NEED your support!
+If you're reading this, you probably have at least some knowledge in Evolutionary
+Computation and its application on optimization problems. I, myself, am still
+a student who is also studying the subject matter as I work on this project, 
+and there is no doubt that Evolutionary Computation is a very broad subject; 
+hence, there is a lot to cover in this framework. This isn't something that can be
+done by one person. More developers will be always appreciated!
