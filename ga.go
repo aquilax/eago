@@ -15,7 +15,7 @@ func NewGA(conf *Config) *GA {
 	}
 }
 
-// initialize random population
+// Initialize random population.
 func (g *GA) InitPopulation() {
 	len := g.conf.GeneLen
 	for i, _ := range g.population {
@@ -23,7 +23,7 @@ func (g *GA) InitPopulation() {
 	}
 }
 
-// assess each DNA's fitness
+// Assess each DNA's fitness.
 func (g *GA) AssessFitness() {
 	for i, _ := range g.population {
 		g.population[i].Reset()
@@ -56,7 +56,7 @@ func (g *GA) quickSort(p []*DNA) []*DNA {
 	return append(high, low...)
 }
 
-// update states
+// Update the current generation.
 func (g *GA) Update() {
 	// update the best
 	localBest := g.population[0]
@@ -75,16 +75,17 @@ func (g *GA) Update() {
 	}
 }
 
-// run GA
+// Run GA.
 func (g *GA) Run() {
 	g.InitPopulation()
+	g.best.Evaluate(g.conf.Evaluate)
 	for i := 0; i < g.conf.NumGen; i++ {
 		g.AssessFitness()
 		g.Update()
 	}
 }
 
-// get best DNA
+// Get the best DNA.
 func (g *GA) Best() *DNA {
 	return g.best
 }
