@@ -96,5 +96,5 @@ kinds of evolutionary algorithms in depth; I would appreciate any criticism
 on this package! 
 2. Simplicity and ease of use are the top priorities of this framework; 
 some decisions were made during the development for such reason.
-..* Genotype is only represented with binary string (at least for now).
-..* Fitness values are always float64.
+  * Genotype is only represented with binary string (at least for now).
+  * Fitness values are always float64.
