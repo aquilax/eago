@@ -13,8 +13,13 @@ with future updates.
 * (mu, lambda) Evolution Strategy
 * (mu + lambda) Evolution Strategy (in progress)
 * Genetic Algorithm
-* Genetic Algorithm with Elitism (planned)
-* Steady-State Genetic Algorithm (planned)
+
+## Planned Algorithms
+These are algorithms that are not implemented yet, but are planned to be added
+in the future.
+* Competitive/Cooperative Coevolution algorithms
+* CMA-ES (Covariance Matrix Adaptation Evolution Strategy)
+* NSGA-II (Non-dominated Sorting Genetic Algorithm 2)
 * And more
 
 ## Installation
@@ -63,23 +68,33 @@ func GeneticAlgorithm() {
 	best := ga.Best()
 	fmt.Printf("BEST: %s\n", best.Gene())
 	fmt.Printf("SCORE: %d\n", int(best.Fitness()))
+
+    // -------- RESULT --------
+    // BEST: 111101111111001111011110111111
+    // SCORE: 25
 }
 ```
 
 # EAGO/NE [![GoDoc](https://godoc.org/github.com/jinseokYeom/eago/ne?status.svg)](https://godoc.org/github.com/jinseokYeom/eago/ne)
 EAGO/NE is an extention of EAGO for NeuroEvolution.
 NeuroEvolution is a machine learning method that uses Evolution Algorithm
-to train a neural network. ```github.com/jinseokYeom/eago/ne``` package is a modular
-implementation that can be customized by the user's choice. 
+to train a neural network. For the sake of this extension, I have decided to
+work on a different package, NEUGO (Neural Networks in Go), which will be an 
+easy-to-use neural network package in Go.
 
-## Algorithms (in progress)
+## Planned Algorithms
 * NE (Basic NeuroEvolution with GA)
 * SANE (Symbiotic, Adaptive NeuroEvolution)
 * ESP (Enforced Sub-Population)
 * NEAT (NeuroEvolution of Augmenting Topologies)
+* And more
 
-## Note
-Simplicity and ease of use are the top priorities of this framework; 
+## Notes
+1. Although I'm hoping to make this a helpful package for many people,
+I started developing this package for the sake of learning about different
+kinds of evolutionary algorithms in depth; I would appreciate any criticism
+on this package! 
+2. Simplicity and ease of use are the top priorities of this framework; 
 some decisions were made during the development for such reason.
-* Genotype is only represented with binary string (at least for now).
-* Fitness values are always float64.
+..* Genotype is only represented with binary string (at least for now).
+..* Fitness values are always float64.
