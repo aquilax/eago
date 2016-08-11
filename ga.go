@@ -22,37 +22,20 @@ func NewGA(conf *Config) *GA {
 	}
 }
 
+// Initialize population.
+func (g *GA) InitPopulation() {
+	for i, _ := range g.population {
+		g.population[i] = NewDNA(g.conf.GeneLen)
+	}
+}
+
 // Assess each DNA's fitness.
 func (g *GA) AssessFitness() {
 	for i, _ := range g.population {
 		g.population[i].Reset()
 		g.population[i].Evaluate(g.conf.Evaluate)
 	}
-	g.population = g.quickSort(g.population)
-}
-
-// sort population by fitness (high - low)
-func (g *GA) quickSort(p []*DNA) []*DNA {
-	if len(p) <= 1 {
-		return p
-	}
-	pivot := p[len(p)/2]
-	low := []*DNA{}
-	high := []*DNA{}
-	equal := []*DNA{}
-	for _, dna := range p {
-		switch g.conf.Compare(dna, pivot) {
-		case -1:
-			low = append(low, dna)
-		case 1:
-			high = append(high, dna)
-		default:
-			equal = append(equal, dna)
-		}
-	}
-	low = append(equal, g.quickSort(low)...)
-	high = g.quickSort(high)
-	return append(high, low...)
+	g.population = quickSort(g.conf, g.population)
 }
 
 // Update the current generation.

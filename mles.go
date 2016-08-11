@@ -35,37 +35,20 @@ func NewMLESComma(mu, lambda int, conf *Config) (*MLESComma, error) {
 	}, nil
 }
 
+// Initialize the population with new random DNAs.
+func (m *MLESComma) InitPopulation() {
+	for i, _ := range m.population {
+		m.population[i] = NewDNA(m.conf.GeneLen)
+	}
+}
+
 // Assess each DNA's fitness.
 func (m *MLESComma) AssessFitness() {
 	for i, _ := range m.population {
 		m.population[i].Reset()
 		m.population[i].Evaluate(m.conf.Evaluate)
 	}
-	m.population = m.quickSort(m.population)
-}
-
-// sort population by fitness (high - low)
-func (m *MLESComma) quickSort(p []*DNA) []*DNA {
-	if len(p) <= 1 {
-		return p
-	}
-	pivot := p[len(p)/2]
-	low := []*DNA{}
-	high := []*DNA{}
-	equal := []*DNA{}
-	for _, dna := range p {
-		switch m.conf.Compare(dna, pivot) {
-		case -1:
-			low = append(low, dna)
-		case 1:
-			high = append(high, dna)
-		default:
-			equal = append(equal, dna)
-		}
-	}
-	low = append(equal, m.quickSort(low)...)
-	high = m.quickSort(high)
-	return append(high, low...)
+	m.population = quickSort(m.conf, m.population)
 }
 
 // Update the current generation.
