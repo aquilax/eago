@@ -9,17 +9,16 @@ type GA struct {
 
 func NewGA(conf *Config) *GA {
 	return &GA{
-		conf:       conf,                       // configuration
-		best:       NewDNA(conf.GeneLen),       // random DNA as best
-		population: make([]*DNA, conf.PopSize), // population
-	}
-}
-
-// Initialize random population.
-func (g *GA) InitPopulation() {
-	len := g.conf.GeneLen
-	for i, _ := range g.population {
-		g.population[i] = NewDNA(len)
+		conf: conf,
+		best: NewDNA(conf.GeneLen),
+		// initialize population
+		population: func() []*DNA {
+			population := make([]*DNA, conf.PopSize)
+			for i, _ := range population {
+				population[i] = NewDNA(conf.GeneLen)
+			}
+			return population
+		}(),
 	}
 }
 
@@ -77,7 +76,6 @@ func (g *GA) Update() {
 
 // Run GA.
 func (g *GA) Run() {
-	g.InitPopulation()
 	g.best.Evaluate(g.conf.Evaluate)
 	for i := 0; i < g.conf.NumGen; i++ {
 		g.AssessFitness()

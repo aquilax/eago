@@ -1,8 +1,6 @@
 package eago
 
 type EA interface {
-	// initialize population
-	InitPopulation()
 	// assess fitness
 	AssessFitness()
 	// update best/population

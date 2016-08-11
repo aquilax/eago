@@ -9,8 +9,7 @@ var (
 
 // (mu, lambda) Evolution Strategy
 type MLESComma struct {
-	mu         int     // selected parents
-	lambda     int     // generated children
+	mu, lambda int     // Mu and Lambda
 	conf       *Config // configuration
 	best       *DNA    // best performing gene
 	population []*DNA  // population
@@ -22,20 +21,18 @@ func NewMLESComma(mu, lambda int, conf *Config) (*MLESComma, error) {
 		return nil, ErrMuLambda
 	}
 	return &MLESComma{
-		mu:         mu,
-		lambda:     lambda,
-		conf:       conf,
-		best:       NewDNA(conf.GeneLen),
-		population: make([]*DNA, lambda),
+		mu:     mu,
+		lambda: lambda,
+		conf:   conf,
+		best:   NewDNA(conf.GeneLen),
+		population: func() []*DNA {
+			population := make([]*DNA, conf.PopSize)
+			for i, _ := range population {
+				population[i] = NewDNA(conf.GeneLen)
+			}
+			return population
+		}(),
 	}, nil
-}
-
-// Initialize population.
-func (m *MLESComma) InitPopulation() {
-	len := m.conf.GeneLen
-	for i, _ := range m.population {
-		m.population[i] = NewDNA(len)
-	}
 }
 
 // Assess each DNA's fitness.
@@ -97,7 +94,6 @@ func (m *MLESComma) Update() {
 
 // Run (mu, lambda) Evolution Strategy.
 func (m *MLESComma) Run() {
-	m.InitPopulation()
 	m.best.Evaluate(m.conf.Evaluate)
 	for i := 0; i < m.conf.NumGen; i++ {
 		m.AssessFitness()
@@ -112,7 +108,24 @@ func (m *MLESComma) Best() *DNA {
 
 // (mu + lambda) Evolution Strategy
 type MLESPlus struct {
+	mu, lambda int     // Mu and Lambda
 	conf       *Config // configuration
 	best       *DNA    // best performing gene
 	population []*DNA  // population
+}
+
+func NewMLESPlus(mu, lambda int, conf *Config) *MLESPlus {
+	return &MLESPlus{
+		mu:     mu,
+		lambda: lambda,
+		conf:   conf,
+		best:   NewDNA(conf.GeneLen),
+		population: func() []*DNA {
+			population := make([]*DNA, conf.PopSize)
+			for i, _ := range population {
+				population[i] = NewDNA(conf.GeneLen)
+			}
+			return population
+		}(),
+	}
 }
