@@ -1,15 +1,15 @@
 package eago
 
-// Cooperative Coevolution Genetic Algorithm
-type CoopGA struct {
+// Cooperative Coevolution Algorithm
+type CoopCEA struct {
 	numSubp    int     // number of subpopulations
 	conf       *Config // configuration of each subpopulation
 	best       []*DNA  // best resulting group of DNAs
 	population []*DNA  // group of sub-populations
 }
 
-func NewCoopGA(numSubp int, conf *Config) *NewCoopGA {
-	return &CoopGA{
+func NewCoopCEA(numSubp int, conf *Config) *NewCoopCEA {
+	return &CoopCEA{
 		conf: conf,
 		// initialize best group of DNAs
 		best: func() []*DNA {
@@ -28,5 +28,19 @@ func NewCoopGA(numSubp int, conf *Config) *NewCoopGA {
 			}
 			return population
 		}(),
+	}
+}
+
+// Initialize population.
+func (c *CoopCEA) InitPopulation() {
+	for i, _ := range c.population {
+		c.population[i] = NewDNA(c.conf.GeneLen)
+	}
+}
+
+// Assess each DNA's fitness.
+func (c *CoopCEA) AssessFitness() {
+	for i := 0; i < c.numSubp; i++ {
+
 	}
 }
