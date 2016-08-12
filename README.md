@@ -20,6 +20,7 @@ in the future.
 * Competitive/Cooperative Coevolution algorithms
 * CMA-ES (Covariance Matrix Adaptation Evolution Strategy)
 * NSGA-II (Non-dominated Sorting Genetic Algorithm 2)
+* Genetic Programming
 * And more
 
 ## Installation
