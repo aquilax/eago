@@ -20,7 +20,6 @@ in the future.
 * Competitive/Cooperative Coevolution algorithms
 * CMA-ES (Covariance Matrix Adaptation Evolution Strategy)
 * NSGA-II (Non-dominated Sorting Genetic Algorithm 2)
-* Genetic Programming
 * And more
 
 ## Installation
@@ -77,7 +76,7 @@ func GeneticAlgorithm() {
 ```
 
 # EAGO/NE [![GoDoc](https://godoc.org/github.com/jinseokYeom/eago/ne?status.svg)](https://godoc.org/github.com/jinseokYeom/eago/ne)
-EAGO/NE is an extention of EAGO for NeuroEvolution.
+EAGO/NE is an extension of EAGO for NeuroEvolution.
 NeuroEvolution is a machine learning method that uses Evolution Algorithm
 to train a neural network. For the sake of this extension, I have decided to
 work on a different package, NEUGO (Neural Networks in Go), which will be an 
@@ -89,6 +88,9 @@ easy-to-use neural network package in Go.
 * ESP (Enforced Sub-Population)
 * NEAT (NeuroEvolution of Augmenting Topologies)
 * And more
+
+# EAGO/GP [![GoDoc](https://godoc.org/github.com/jinseokYeom/eago/gp?status.svg)](https://godoc.org/github.com/jinseokYeom/eago/gp)
+EAGO/GP is an extension of EAGO for Genetic Programming.
 
 ## Notes
 1. Although I'm hoping to make this a helpful package for many people,
