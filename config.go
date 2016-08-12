@@ -2,6 +2,7 @@ package eago
 
 // configuration
 type Config struct {
+	DrawGraph    bool          // whether to draw graph
 	GeneLen      int           // gene length
 	PopSize      int           // population size
 	NumGen       int           // number of generations
@@ -15,6 +16,11 @@ type Config struct {
 // new configuration default to null
 func NewConfig() *Config {
 	return &Config{}
+}
+
+// set whether to draw graph and output image file
+func (c *Config) DrawGraph(b bool) {
+	c.DrawGraph = b
 }
 
 // set DNA length
