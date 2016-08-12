@@ -8,9 +8,10 @@ import (
 // DNA is a binary coded genotype. It's gene is encoded
 // with a string of "0"s and "1"s.
 type DNA struct {
-	size    int     // size of the chromosome
-	gene    string  // binary-coded gene
-	fitness float64 // fitness score
+	size      int     // size of the chromosome
+	gene      string  // binary-coded gene
+	fitness   float64 // fitness score
+	evaluated bool    // true if it has been evaluated
 }
 
 func NewDNA(size int) *DNA {
@@ -27,7 +28,8 @@ func NewDNA(size int) *DNA {
 			}
 			return buf.String()
 		}(),
-		fitness: 0.0,
+		fitness:   0.0,
+		evaluated: false,
 	}
 }
 
@@ -46,9 +48,15 @@ func (d *DNA) Fitness() float64 {
 	return d.fitness
 }
 
+// Check if this DNA has been evaluated.
+func (d *DNA) IsEvaluated() bool {
+	return d.evaluated
+}
+
 // Reset fitness score with default score.
 func (d *DNA) Reset() {
 	d.fitness = 0.0
+	d.evaluated = false
 }
 
 // Evaluate given an evaluation function.
@@ -61,6 +69,7 @@ func (d *DNA) Copy(d1 *DNA) {
 	d.size = d1.size
 	d.gene = d1.gene
 	d.fitness = d1.fitness
+	d.evaluated = d1.evaluated
 }
 
 // Bit flip mutation given mutation rate
