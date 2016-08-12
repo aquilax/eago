@@ -51,7 +51,8 @@ func Eval(d *eago.DNA) float64 {
 func GeneticAlgorithm() {
     // Configure and create GA,
 	ga := eago.NewGA(&eago.Config{
-       	GeneLen:      20,                   // size of each DNA
+       	DrawGraph:    false,                // true if you want graph
+        GeneLen:      20,                   // size of each DNA
 		PopSize:      50,                   // population size (number of DNAs)
 		NumGen:       100,                  // number of generations
 		MutationRate: 0.3,                  // mutation rate
