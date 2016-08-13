@@ -112,3 +112,58 @@ func NewMLESPlus(mu, lambda int, conf *Config) *MLESPlus {
 		}(),
 	}
 }
+
+// Initialize the population with new random DNAs.
+func (m *MLESPlus) InitPopulation() {
+	for i, _ := range m.population {
+		m.population[i] = NewDNA(m.conf.GeneLen)
+	}
+}
+
+// Assess each DNA's fitness.
+func (m *MLESPlus) AssessFitness() {
+	for i, _ := range m.population {
+		m.population[i].Reset()
+		m.population[i].Evaluate(m.conf.Evaluate)
+	}
+	m.population = quickSort(m.conf, m.population)
+}
+
+// Update the current generation.
+func (m *MLESPlus) Update() {
+	// update the best
+	localBest := m.population[0]
+	if m.conf.Compare(localBest, m.best) == 1 {
+		m.best.Copy(localBest)
+	}
+	// assuming population is already sorted
+	selected := m.population[:m.mu]
+	ratio := m.lambda / m.mu
+	children := make([]*DNA, 0, m.lambda)
+	// O(ratio * mu) = O(lambda) -> Linear time
+	for _, parent := range selected {
+		for i := 0; i < ratio; i++ {
+			child := NewDNA(m.conf.GeneLen)
+			child.Copy(parent)
+			child.Mutate(m.conf.MutationRate)
+			children = append(children, child)
+		}
+	}
+	// update the population
+	m.population = copy(m.population, selected)
+	m.population = append(m.population, children)
+}
+
+// Run (mu + lambda) Evolution Strategy.
+func (m *MLESPlus) Run() {
+	m.best.Evaluate(m.conf.Evaluate)
+	for i := 0; i < m.conf.NumGen; i++ {
+		m.AssessFitness()
+		m.Update()
+	}
+}
+
+// Get the best DNA.
+func (m *MLESPlus) Best() *DNA {
+	return m.best
+}
