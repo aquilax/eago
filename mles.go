@@ -97,7 +97,11 @@ type MLESPlus struct {
 	population []*DNA  // population
 }
 
-func NewMLESPlus(mu, lambda int, conf *Config) *MLESPlus {
+func NewMLESPlus(mu, lambda int, conf *Config) (*MLESPlus, error) {
+	// lambda has to be divisable by mu
+	if lambda%mu != 0 {
+		return nil, ErrMuLambda
+	}
 	return &MLESPlus{
 		mu:     mu,
 		lambda: lambda,
@@ -110,7 +114,7 @@ func NewMLESPlus(mu, lambda int, conf *Config) *MLESPlus {
 			}
 			return population
 		}(),
-	}
+	}, nil
 }
 
 // Initialize the population with new random DNAs.
@@ -150,8 +154,8 @@ func (m *MLESPlus) Update() {
 		}
 	}
 	// update the population
-	m.population = copy(m.population, selected)
-	m.population = append(m.population, children)
+	m.population = selected
+	m.population = append(m.population, children...)
 }
 
 // Run (mu + lambda) Evolution Strategy.

@@ -19,7 +19,7 @@ func NewConfig() *Config {
 }
 
 // set whether to draw graph and output image file
-func (c *Config) DrawGraph(b bool) {
+func (c *Config) SetDrawGraph(b bool) {
 	c.DrawGraph = b
 }
 

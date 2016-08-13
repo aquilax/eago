@@ -2,7 +2,9 @@ package eago
 
 import (
 	"fmt"
+	"math/rand"
 	"testing"
+	"time"
 )
 
 func Eval(d *DNA) float64 {
@@ -19,6 +21,8 @@ func Eval(d *DNA) float64 {
 }
 
 func TestGA(t *testing.T) {
+	rand.Seed(time.Now().UnixNano())
+
 	ga := NewGA(&Config{
 		GeneLen:      30,
 		PopSize:      100,

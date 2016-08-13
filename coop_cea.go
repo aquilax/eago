@@ -8,7 +8,7 @@ type CoopCEA struct {
 	population []*DNA  // group of sub-populations
 }
 
-func NewCoopCEA(numSubp int, conf *Config) *NewCoopCEA {
+func NewCoopCEA(numSubp int, conf *Config) *CoopCEA {
 	return &CoopCEA{
 		conf: conf,
 		// initialize best group of DNAs
@@ -23,7 +23,7 @@ func NewCoopCEA(numSubp int, conf *Config) *NewCoopCEA {
 		population: func() []*DNA {
 			totalSize := numSubp * conf.PopSize
 			population := make([]*DNA, totalSize)
-			for i, _ := range populations {
+			for i, _ := range population {
 				population[i] = NewDNA(conf.GeneLen)
 			}
 			return population
@@ -40,7 +40,4 @@ func (c *CoopCEA) InitPopulation() {
 
 // Assess each DNA's fitness.
 func (c *CoopCEA) AssessFitness() {
-	for i := 0; i < c.numSubp; i++ {
-
-	}
 }
