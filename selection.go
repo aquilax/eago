@@ -46,3 +46,6 @@ func FPSelect() SelectFunc {
 		}
 	}
 }
+
+// MLSelect() returns a selection function for MLES algorithms. It
+// simply returns Lambda best DNAs from Mu DNAs.
