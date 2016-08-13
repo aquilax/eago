@@ -10,5 +10,5 @@ type EA interface {
 	// execute algorithm
 	Run()
 	// get best performing gene
-	Best() string
+	Best() *DNA
 }
