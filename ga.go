@@ -1,5 +1,7 @@
 package eago
 
+import "fmt"
+
 // Genetic Algorithm
 type GA struct {
 	conf       *Config // configuration
@@ -44,6 +46,7 @@ func (g *GA) Update() {
 	localBest := g.population[0]
 	if g.conf.Compare(localBest, g.best) == 1 {
 		g.best.Copy(localBest)
+		fmt.Printf("BEST: %f\n", g.best.Fitness())
 	}
 	// update the population
 	for i := 0; i < g.conf.PopSize; i++ {
