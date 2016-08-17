@@ -11,16 +11,13 @@ import (
 // that decode a DNA to a neural network (from neugo package)
 // phenotype and evaluate the fitness, given a configuration and
 // an evaluation environment.
-func NE(conf *neugo.Config, env neugo.Environment) (eago.EvaluateFunc, error) {
-	nn, err := neugo.NewNeuralNet(conf)
-	if err != nil {
-		return nil, err
-	}
+func NE(nn *neugo.NeuralNet, env neugo.Environment) eago.EvaluateFunc {
+	// return the evaluation function
 	return func(d *eago.DNA) float64 {
 		// build the neural net with decoded DNA
 		nn.Build(decode(d, nn.NumWeights()))
 		return env(nn)
-	}, nil
+	}
 }
 
 // decode a DNA to get list of weights
