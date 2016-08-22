@@ -2,10 +2,10 @@ package eago
 
 // Cooperative Coevolution Algorithm
 type CoopCEA struct {
-	numSubp    int     // number of subpopulations
-	conf       *Config // configuration of each subpopulation
-	best       []*DNA  // best resulting group of DNAs
-	population []*DNA  // group of sub-populations
+	numSubp    int      // number of subpopulations
+	conf       *Config  // configuration of each subpopulation
+	best       []*DNA   // best resulting group of DNAs
+	population [][]*DNA // group of sub-populations
 }
 
 func NewCoopCEA(numSubp int, conf *Config) *CoopCEA {
@@ -20,11 +20,13 @@ func NewCoopCEA(numSubp int, conf *Config) *CoopCEA {
 			return best
 		}(),
 		// initialize population
-		population: func() []*DNA {
-			totalSize := numSubp * conf.PopSize
-			population := make([]*DNA, totalSize)
+		population: func() [][]*DNA {
+			population := make([][]*DNA, numSubp)
 			for i, _ := range population {
-				population[i] = NewDNA(conf.GeneLen)
+				population[i] = make([]*DNA, conf.PopSize)
+				for j, _ := range population[i] {
+					population[i][j] = NewDNA(conf.GeneLen)
+				}
 			}
 			return population
 		}(),
@@ -34,11 +36,13 @@ func NewCoopCEA(numSubp int, conf *Config) *CoopCEA {
 // Initialize population.
 func (c *CoopCEA) InitPopulation() {
 	for i, _ := range c.population {
-		c.population[i] = NewDNA(c.conf.GeneLen)
+		for j, _ := range c.population[i] {
+			c.population[i][j] = NewDNA(c.conf.GeneLen)
+		}
 	}
 }
 
 // Assess each DNA's fitness.
 func (c *CoopCEA) AssessFitness() {
-
+	selected := make([]*DNA, c.numSubp)
 }
