@@ -7,9 +7,9 @@ import (
 	"time"
 )
 
-func Eval(d *DNA) float64 {
-	gene := d.Gene()
-	size := d.Size()
+func Eval(d ...*DNA) float64 {
+	gene := d[0].Gene()
+	size := d[0].Size()
 	score := 0.0
 	for i := 0; i < size; i++ {
 		bit := string(gene[i])

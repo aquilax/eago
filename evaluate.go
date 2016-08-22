@@ -1,7 +1,7 @@
 package eago
 
 // Evaluation function is a type of function that evaluates
-// a DNA's fitness and return its fitness value in float64.
-// This step involves decoding the DNA (genotype) into a
-// phenotype, then testing its performance.
-type EvaluateFunc func(*DNA) float64
+// one or more DNAs' fitnesses and return their fitness value
+// in float64. This step involves decoding DNAs (genotype)
+// into a phenotype, then testing its performance.
+type EvaluateFunc func(...*DNA) float64

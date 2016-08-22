@@ -40,4 +40,5 @@ func (c *CoopCEA) InitPopulation() {
 
 // Assess each DNA's fitness.
 func (c *CoopCEA) AssessFitness() {
+
 }
