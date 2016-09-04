@@ -66,10 +66,7 @@ func (d *DNA) Evaluate(eval EvaluateFunc) {
 
 // Copy other DNA's information.
 func (d *DNA) Copy(d1 *DNA) {
-	d.size = d1.size
-	d.gene = d1.gene
-	d.fitness = d1.fitness
-	d.evaluated = d1.evaluated
+	*d1 = *d
 }
 
 // Bit flip mutation given mutation rate
